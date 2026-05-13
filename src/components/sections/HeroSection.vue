@@ -11,8 +11,8 @@ const { t } = useI18n();
     style="
       background: linear-gradient(
         180deg,
-        #3f89bd 0%,
-        #c8dfee 70%,
+        #3f89bd 26%,
+        #c8dfee 80%,
         #f9fafa 100%
       );
     "

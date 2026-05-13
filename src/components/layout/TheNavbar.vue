@@ -62,7 +62,7 @@ const navItems = [
 
 <template>
   <header
-    class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 h-[66px]"
+    class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300"
     :style="
       isScrolled || isMobileOpen
         ? 'background-color: #3f89bd'
