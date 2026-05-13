@@ -21,13 +21,13 @@ useScrollReveal([headerRef, imageRef, descRef]);
   >
     <!-- Label + Title -->
     <div ref="headerRef" class="reveal text-center px-4">
-      <p class="font-medium" style="font-size: 16px; color: #3f89bd">
+      <p class="font-medium text-sm sm:text-base" style="color: #3f89bd">
         {{ t('vision.label') }}
       </p>
       <h2
         id="vision-title"
-        class="font-bold text-gray-800 mt-2"
-        style="font-size: 36px; line-height: 1.2"
+        class="font-bold text-gray-800 mt-2 text-2xl sm:text-3xl lg:text-4xl"
+        style="line-height: 1.2"
       >
         {{ t('vision.title') }}
       </h2>
@@ -39,12 +39,12 @@ useScrollReveal([headerRef, imageRef, descRef]);
       class="reveal delay-200 mx-auto mt-8 px-4"
       style="max-width: 1002px"
     >
-      <div class="overflow-hidden w-full" style="border-radius: 32px">
+      <div class="overflow-hidden w-full rounded-2xl sm:rounded-[32px]">
         <img
           :src="sceneryImg"
           alt="GO-GENIE sustainability scenery"
           class="w-full object-cover"
-          style="height: 567px"
+          style="height: clamp(200px, 40vw, 567px)"
         />
       </div>
     </div>

@@ -28,25 +28,24 @@ useScrollReveal([imgRef, cardRef]);
       />
 
       <!-- White card overlapping just the bottom edge of image -->
-      <div style="padding: 0 40px">
+      <div class="px-0 sm:px-10">
         <div
           ref="cardRef"
           class="reveal delay-200"
           style="
-            margin-top: -130px;
+            margin-top: -40px;
             background: #ffffff;
             border: 1px solid rgba(10, 99, 161, 0.25);
             border-radius: 24px;
-
             text-align: center;
-            padding: 40px 40px 48px;
+            padding: 32px 20px 40px;
             position: relative;
             z-index: 1;
           "
         >
           <h2
+            class="text-xl sm:text-2xl md:text-[28px]"
             style="
-              font-size: 28px;
               font-weight: 700;
               color: #1f2937;
               line-height: 1.3;
@@ -62,7 +61,7 @@ useScrollReveal([imgRef, cardRef]);
             style="
               margin: 16px auto 0;
               max-width: 520px;
-              font-size: 18px;
+              font-size: 16px;
               color: #6b7280;
               line-height: 1.7;
             "

@@ -48,11 +48,11 @@ const features = computed(() => [
       <div ref="headerRef" class="reveal text-center mb-14">
         <h2
           id="carbon-title"
+          class="text-2xl sm:text-3xl lg:text-4xl"
           style="
             font-family: 'Inter', sans-serif;
             font-weight: 500;
-            font-size: 36px;
-            line-height: 100%;
+            line-height: 1.2;
             letter-spacing: 0px;
             color: #1f2937;
             text-align: center;
@@ -68,8 +68,8 @@ const features = computed(() => [
           style="
             font-family: 'Inter', sans-serif;
             font-weight: 400;
-            font-size: 18px;
-            line-height: 22px;
+            font-size: 16px;
+            line-height: 1.6;
             letter-spacing: 0px;
             text-align: center;
             color: #6b7280;
@@ -137,7 +137,7 @@ const features = computed(() => [
             style="
               font-family: 'Inter', sans-serif;
               font-weight: 400;
-              font-size: 18px;
+              font-size: 15px;
               line-height: 1.6;
               color: #6b7280;
             "

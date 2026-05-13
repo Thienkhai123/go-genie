@@ -20,27 +20,25 @@ const { t } = useI18n();
   >
     <!-- Text block -->
     <div
-      class="relative z-10 text-center px-4 mx-auto pt-14 pb-10"
+      class="relative z-10 text-center px-4 mx-auto pt-14 pb-10 w-full"
       style="max-width: 900px"
     >
       <h1
-        class="hero-title font-bold text-white leading-tight whitespace-nowrap"
-        style="font-size: 40px"
+        class="hero-title font-bold text-white leading-tight text-2xl sm:text-3xl md:text-4xl lg:text-[40px]"
       >
         {{ t('hero.title') }}
       </h1>
       <p
-        class="hero-desc mt-4 text-white/85 mx-auto whitespace-nowrap"
-        style="font-size: 18px"
+        class="hero-desc mt-4 text-white/85 mx-auto text-sm sm:text-base md:text-lg"
+        style="max-width: 640px"
       >
         {{ t('hero.description') }}
       </p>
       <a
         href="#"
-        class="hero-cta mt-8 inline-flex items-center gap-2 font-semibold rounded-xl transition-colors duration-200 cursor-pointer"
+        class="hero-cta mt-8 inline-flex items-center gap-2 font-semibold rounded-xl transition-colors duration-200 cursor-pointer text-sm sm:text-base"
         style="
-          font-size: 16px;
-          padding: 12px 28px;
+          padding: 10px 22px;
           background: #e8f2fb;
           border: 2px solid #7ab8e0;
           color: #2a7ab8;

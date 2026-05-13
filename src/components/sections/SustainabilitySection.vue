@@ -88,11 +88,11 @@ const features = computed(() => [
           ]"
         >
           <!-- Illustration -->
-          <div class="mb-6" style="width: 206px; height: 206px">
+          <div class="mb-6">
             <img
               :src="feature.image"
               :alt="feature.title"
-              style="width: 206px; height: 206px; object-fit: contain"
+              class="w-32 h-32 sm:w-40 sm:h-40 md:w-[206px] md:h-[206px] object-contain mx-auto"
             />
           </div>
 
@@ -113,7 +113,7 @@ const features = computed(() => [
           <p
             style="
               font-family: 'Inter', sans-serif;
-              font-size: 18px;
+              font-size: 15px;
               color: #6b7280;
               line-height: 1.6;
               max-width: 220px;

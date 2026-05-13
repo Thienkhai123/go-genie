@@ -45,10 +45,10 @@ const features = computed(() => [
       <div ref="headerRef" class="reveal text-center mb-14">
         <h2
           id="reporting-title"
+          class="text-2xl sm:text-3xl"
           style="
             font-family: 'Inter', sans-serif;
             font-weight: 600;
-            font-size: 30px;
             line-height: 1.2;
             color: #1f2937;
           "
@@ -83,7 +83,7 @@ const features = computed(() => [
             }
           "
           :class="[
-            'reveal card-hover bg-white rounded-2xl flex items-center justify-between',
+            'reveal card-hover bg-white rounded-2xl',
             i === 1 ? 'delay-200' : i === 2 ? 'delay-300' : '',
           ]"
           style="
@@ -91,22 +91,16 @@ const features = computed(() => [
             box-shadow:
               5px 8px 9px 0 rgba(10, 99, 161, 0.08),
               inset -8px -8px 16px 0 rgba(3, 106, 177, 0.07);
-            padding: 24px 32px;
-            min-height: 200px;
-            max-height: 200px;
-            overflow: visible;
-            position: relative;
           "
         >
-          <!-- Text -->
-          <div class="flex-1">
+          <!-- Mobile: stacked layout -->
+          <div class="flex flex-col sm:hidden p-6 gap-4">
             <h3
               style="
                 font-family: 'Inter', sans-serif;
                 font-weight: 700;
-                font-size: 30px;
+                font-size: 22px;
                 color: #1f2937;
-                margin-bottom: 10px;
               "
             >
               {{ feature.title }}
@@ -114,37 +108,80 @@ const features = computed(() => [
             <p
               style="
                 font-family: 'Inter', sans-serif;
-                font-size: 18px;
+                font-size: 15px;
                 color: #6b7280;
                 line-height: 1.6;
-                max-width: 280px;
               "
             >
               {{ feature.description }}
             </p>
-          </div>
-
-          <!-- Illustration: overflow above card -->
-          <div
-            class="shrink-0"
-            style="
-              width: 340px;
-              height: 300px;
-              position: absolute;
-              right: 24px;
-              bottom: 0;
-            "
-          >
             <img
               :src="feature.image"
               :alt="feature.title"
-              style="
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-                object-position: bottom;
-              "
+              class="w-full rounded-xl object-contain"
+              style="max-height: 200px"
             />
+          </div>
+
+          <!-- Desktop: side-by-side with overflow image -->
+          <div
+            class="hidden sm:flex items-center justify-between"
+            style="
+              padding: 24px 32px;
+              min-height: 200px;
+              max-height: 200px;
+              overflow: visible;
+              position: relative;
+            "
+          >
+            <!-- Text -->
+            <div class="flex-1">
+              <h3
+                style="
+                  font-family: 'Inter', sans-serif;
+                  font-weight: 700;
+                  font-size: 30px;
+                  color: #1f2937;
+                  margin-bottom: 10px;
+                "
+              >
+                {{ feature.title }}
+              </h3>
+              <p
+                style="
+                  font-family: 'Inter', sans-serif;
+                  font-size: 18px;
+                  color: #6b7280;
+                  line-height: 1.6;
+                  max-width: 280px;
+                "
+              >
+                {{ feature.description }}
+              </p>
+            </div>
+
+            <!-- Illustration: overflow above card -->
+            <div
+              class="shrink-0"
+              style="
+                width: 340px;
+                height: 300px;
+                position: absolute;
+                right: 24px;
+                bottom: 0;
+              "
+            >
+              <img
+                :src="feature.image"
+                :alt="feature.title"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: contain;
+                  object-position: bottom;
+                "
+              />
+            </div>
           </div>
         </div>
       </div>
