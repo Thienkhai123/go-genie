@@ -7,7 +7,7 @@ const routes: RouteRecordRaw[] = [
     name: 'Home',
     component: () => import('@/views/HomeView.vue'),
     meta: {
-      title: 'Trang chủ - Company Name',
+      title: 'Trang chủ',
       description: 'Công ty công nghệ hàng đầu Việt Nam',
     },
   },
@@ -16,7 +16,7 @@ const routes: RouteRecordRaw[] = [
     name: 'About',
     component: () => import('@/views/AboutView.vue'),
     meta: {
-      title: 'Về chúng tôi - Company Name',
+      title: 'Về chúng tôi ',
       description: 'Tìm hiểu về lịch sử và đội ngũ của chúng tôi',
     },
   },
@@ -25,7 +25,7 @@ const routes: RouteRecordRaw[] = [
     name: 'Services',
     component: () => import('@/views/ServicesView.vue'),
     meta: {
-      title: 'Dịch vụ - Company Name',
+      title: 'Dịch vụ ',
       description: 'Các dịch vụ công nghệ chuyên nghiệp',
     },
   },
@@ -34,7 +34,7 @@ const routes: RouteRecordRaw[] = [
     name: 'Contact',
     component: () => import('@/views/ContactView.vue'),
     meta: {
-      title: 'Liên hệ - Company Name',
+      title: 'Liên hệ ',
       description: 'Liên hệ với chúng tôi',
     },
   },
