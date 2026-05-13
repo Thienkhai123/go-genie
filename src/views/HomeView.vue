@@ -28,8 +28,8 @@ useHead({
     <HeroSection />
     <VisionSection />
     <CarbonTrackingSection />
-    <SustainabilitySection />
     <ReportingSection />
+    <SustainabilitySection />
     <CtaSection />
   </main>
 </template>

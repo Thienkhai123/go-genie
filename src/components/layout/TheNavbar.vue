@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue';
 
@@ -7,13 +7,17 @@ const { t } = useI18n();
 
 const activeDropdown = ref<string | null>(null);
 const isMobileOpen = ref(false);
+const isScrolled = ref(false);
+
+function onScroll() {
+  isScrolled.value = window.scrollY > 10;
+}
+
+onMounted(() => window.addEventListener('scroll', onScroll));
+onUnmounted(() => window.removeEventListener('scroll', onScroll));
 
 function toggleDropdown(key: string) {
   activeDropdown.value = activeDropdown.value === key ? null : key;
-}
-
-function closeAll() {
-  activeDropdown.value = null;
 }
 
 const navItems = [
@@ -58,19 +62,27 @@ const navItems = [
 
 <template>
   <header
-    class="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#1a6fa8] to-[#2196c4]"
+    class="fixed top-0 left-0 right-0 z-50"
+    :style="
+      isScrolled ? 'background-color: #3f89bd' : 'background-color: transparent'
+    "
   >
-    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
+    <nav class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex items-center h-14 gap-8">
         <!-- Logo -->
-        <router-link to="/" class="flex items-center">
-          <span class="text-white font-black text-xl tracking-wide"
+        <router-link to="/" class="shrink-0">
+          <span
+            class="text-white font-black tracking-wide"
+            style="font-size: 27px; letter-spacing: 0.02em"
             >GO-GENIE</span
           >
         </router-link>
 
-        <!-- Desktop Nav -->
-        <div class="hidden lg:flex items-center gap-1" @mouseleave="closeAll">
+        <!-- Desktop Nav links -->
+        <div
+          class="hidden lg:flex items-center gap-0 flex-1"
+          @mouseleave="activeDropdown = null"
+        >
           <div
             v-for="item in navItems"
             :key="item.key"
@@ -78,11 +90,12 @@ const navItems = [
             @mouseenter="activeDropdown = item.key"
           >
             <button
-              class="flex items-center gap-1 px-3 py-2 text-white/90 hover:text-white text-sm font-medium transition-colors"
+              class="flex items-center gap-1 px-3 py-2 text-white hover:text-white/80 transition-colors whitespace-nowrap cursor-pointer"
+              style="font-size: 13px"
             >
               {{ item.label() }}
               <svg
-                class="w-3.5 h-3.5 mt-0.5"
+                class="w-3 h-3 opacity-80"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -90,7 +103,7 @@ const navItems = [
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
+                  stroke-width="2.5"
                   d="M19 9l-7 7-7-7"
                 />
               </svg>
@@ -99,13 +112,14 @@ const navItems = [
             <!-- Dropdown -->
             <div
               v-if="activeDropdown === item.key"
-              class="absolute top-full left-0 mt-1 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50"
+              class="absolute top-full left-0 mt-0 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50"
             >
               <a
                 v-for="child in item.children"
                 :key="child.href"
                 :href="child.href"
-                class="block px-4 py-2 text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                class="block px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors cursor-pointer"
+                style="font-size: 13px"
               >
                 {{ child.label() }}
               </a>
@@ -113,31 +127,41 @@ const navItems = [
           </div>
         </div>
 
+        <!-- Spacer -->
+        <div class="flex-1 hidden lg:block" />
+
         <!-- Right actions -->
-        <div class="hidden lg:flex items-center gap-3">
+        <div class="hidden lg:flex items-center gap-2">
+          <!-- Track Your Parcel button -->
           <a
             href="#"
-            class="px-4 py-1.5 border border-white/70 text-white text-sm font-medium rounded-full hover:bg-white/10 transition-colors"
+            class="px-4 py-1.5 border border-white text-white font-medium rounded hover:bg-white/10 transition-colors whitespace-nowrap cursor-pointer"
+            style="font-size: 13px"
           >
             {{ t('nav.trackParcel') }}
           </a>
+
+          <!-- Sign In button -->
           <a
             href="#"
-            class="px-4 py-1.5 text-white text-sm font-medium hover:text-white/80 transition-colors"
+            class="px-4 py-1.5 bg-white font-medium rounded hover:bg-white/90 transition-colors cursor-pointer"
+            style="font-size: 13px; color: #3f89bd"
           >
             {{ t('nav.signIn') }}
           </a>
+
+          <!-- Language switcher with flag -->
           <LanguageSwitcher :is-scrolled="false" />
         </div>
 
         <!-- Mobile toggle -->
         <button
-          class="lg:hidden p-2 text-white"
+          class="lg:hidden ml-auto p-2 text-white cursor-pointer"
           @click="isMobileOpen = !isMobileOpen"
           aria-label="Toggle menu"
         >
           <svg
-            class="w-6 h-6"
+            class="w-5 h-5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -163,16 +187,17 @@ const navItems = [
       <!-- Mobile menu -->
       <div
         v-if="isMobileOpen"
-        class="lg:hidden bg-[#1a6fa8] border-t border-white/20 py-4 space-y-1"
+        class="lg:hidden border-t border-white/20 py-3 space-y-1"
       >
         <div v-for="item in navItems" :key="item.key">
           <button
-            class="w-full flex items-center justify-between px-4 py-2 text-white text-sm font-medium"
+            class="w-full flex items-center justify-between px-4 py-2 text-white cursor-pointer"
+            style="font-size: 13px"
             @click="toggleDropdown(item.key)"
           >
             {{ item.label() }}
             <svg
-              class="w-4 h-4"
+              class="w-3 h-3"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -185,27 +210,35 @@ const navItems = [
               />
             </svg>
           </button>
-          <div v-if="activeDropdown === item.key" class="pl-6 space-y-1">
+          <div v-if="activeDropdown === item.key" class="pl-6">
             <a
               v-for="child in item.children"
               :key="child.href"
               :href="child.href"
-              class="block px-4 py-1.5 text-white/80 text-sm hover:text-white"
+              class="block px-4 py-1.5 text-white/80 hover:text-white cursor-pointer"
+              style="font-size: 13px"
             >
               {{ child.label() }}
             </a>
           </div>
         </div>
         <div
-          class="px-4 pt-3 flex items-center gap-3 border-t border-white/20 mt-2"
+          class="px-4 pt-3 flex items-center gap-2 border-t border-white/20 mt-2"
         >
           <a
             href="#"
-            class="px-4 py-1.5 border border-white/70 text-white text-sm rounded-full"
+            class="px-4 py-1.5 border border-white text-white rounded"
+            style="font-size: 13px"
           >
             {{ t('nav.trackParcel') }}
           </a>
-          <a href="#" class="text-white text-sm">{{ t('nav.signIn') }}</a>
+          <a
+            href="#"
+            class="px-4 py-1.5 border text-white rounded"
+            style="font-size: 13px"
+          >
+            {{ t('nav.signIn') }}
+          </a>
           <LanguageSwitcher :is-scrolled="false" />
         </div>
       </div>

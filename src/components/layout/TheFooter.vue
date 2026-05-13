@@ -72,7 +72,7 @@ const socials = [
 </script>
 
 <template>
-  <footer class="bg-[#2196c4] text-white">
+  <footer class="text-white" style="background: #3f89bd">
     <!-- Main footer links -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6">
       <!-- Logo -->
@@ -87,14 +87,14 @@ const socials = [
       <!-- Nav columns -->
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 mb-10">
         <div v-for="col in footerColumns" :key="col.titleKey">
-          <h4 class="font-semibold text-white text-sm mb-4">
+          <h4 class="font-semibold text-white text-base mb-4">
             {{ t(col.titleKey) }}
           </h4>
           <ul class="space-y-2.5">
             <li v-for="link in col.links" :key="link.key">
               <a
                 :href="link.href"
-                class="text-white/75 hover:text-white text-sm transition-colors"
+                class="text-white/75 hover:text-white text-base transition-colors cursor-pointer"
               >
                 {{ t(link.key) }}
               </a>
@@ -106,22 +106,24 @@ const socials = [
       <hr class="border-white/20 mb-6" />
 
       <!-- Addresses + Social -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 items-start">
-        <p class="text-white/80 text-xs leading-relaxed">
+      <div
+        class="flex flex-col sm:flex-row justify-between gap-6 items-start pb-4"
+      >
+        <p class="text-white/80 text-base leading-relaxed">
           {{ t('footer.sgAddress') }}
         </p>
-        <p class="text-white/80 text-xs leading-relaxed">
+        <p class="text-white/80 text-base leading-relaxed">
           {{ t('footer.vnAddress') }}
         </p>
         <div>
-          <p class="text-white/80 text-xs mb-3">{{ t('footer.followUs') }}</p>
+          <p class="text-white/80 text-base mb-3">{{ t('footer.followUs') }}</p>
           <div class="flex gap-3">
             <a
               v-for="social in socials"
               :key="social.name"
               :href="social.href"
               :aria-label="social.name"
-              class="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors"
+              class="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors cursor-pointer"
             >
               <svg
                 class="w-4 h-4 text-white"
@@ -145,84 +147,74 @@ const socials = [
     <!-- Awards & Chambers section -->
     <div class="bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div class="flex flex-col lg:flex-row gap-8 items-center">
           <!-- Left: text -->
-          <div>
+          <div class="w-full lg:max-w-[298px] shrink-0">
             <h4 class="font-bold text-gray-800 text-sm mb-3">
               {{ t('footer.awards') }}
             </h4>
             <ul class="space-y-1 mb-6">
-              <li class="text-gray-600 text-xs">{{ t('footer.award1') }}</li>
-              <li class="text-gray-600 text-xs">{{ t('footer.award2') }}</li>
-              <li class="text-gray-600 text-xs">{{ t('footer.award3') }}</li>
+              <li class="text-gray-600 text-[14px]">
+                {{ t('footer.award1') }}
+              </li>
+              <li class="text-gray-600 text-[14px]">
+                {{ t('footer.award2') }}
+              </li>
+              <li class="text-gray-600 text-[14px]">
+                {{ t('footer.award3') }}
+              </li>
             </ul>
             <h4 class="font-bold text-gray-800 text-sm mb-3">
               {{ t('footer.chambers') }}
             </h4>
             <ul class="space-y-2">
-              <li class="text-gray-600 text-xs">{{ t('footer.chamber1') }}</li>
-              <li class="text-gray-600 text-xs">{{ t('footer.chamber2') }}</li>
+              <li class="text-gray-600 text-[14px]">
+                {{ t('footer.chamber1') }}
+              </li>
+              <li class="text-gray-600 text-[14px]">
+                {{ t('footer.chamber2') }}
+              </li>
             </ul>
           </div>
 
-          <!-- Right: award logos placeholder -->
-          <div
-            class="flex flex-wrap items-center gap-6 justify-start lg:justify-end"
-          >
-            <!-- Singapore Prestige Brand Award -->
-            <div class="flex flex-col items-center text-center w-24">
-              <div
-                class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-md mb-1"
-              >
-                <span
-                  class="text-white text-xs font-bold text-center leading-tight px-1"
-                  >SPBA 2025</span
-                >
-              </div>
-              <span class="text-gray-500 text-[10px] leading-tight"
-                >Singapore Prestige Brand Award</span
-              >
-            </div>
+          <!-- Right: award logos -->
+          <div class="flex flex-1 flex-wrap items-center justify-between gap-4">
+            <!-- SPBA Transformation Efforts -->
+            <img
+              src="@/assets/images/Transformation Efforts - Promising Brands - Gold.png"
+              alt="SPBA 2025 - Transformation Efforts"
+              class="w-[146px] h-auto object-contain"
+            />
 
             <!-- Brands for Good -->
-            <div class="flex items-center gap-1">
-              <span class="text-2xl font-black text-gray-700 italic"
-                >BRANDS</span
-              >
-              <div class="flex flex-col">
-                <span class="text-xs text-gray-500 italic">for</span>
-                <span class="text-2xl font-black text-green-600 italic"
-                  >GOOD</span
-                >
-              </div>
-            </div>
+            <img
+              src="@/assets/images/brandsForGood.png"
+              alt="Brands For Good"
+              class="w-[146px] h-auto object-contain"
+            />
 
-            <!-- SCCCI logo placeholder -->
-            <div
-              class="w-16 h-16 rounded-full border-2 border-red-500 flex items-center justify-center"
-            >
-              <span
-                class="text-red-500 text-[9px] font-bold text-center leading-tight px-1"
-                >SCCCI</span
-              >
-            </div>
+            <!-- SCCCI -->
+            <img
+              src="@/assets/images/logo_vertical.png"
+              alt="Singapore Chinese Chamber of Commerce & Industry"
+              class="w-[146px] h-auto object-contain"
+            />
 
-            <!-- SBF logo placeholder -->
-            <div class="flex items-center">
-              <span class="text-3xl font-black text-blue-500 tracking-tight"
-                >SBF</span
-              >
-              <span class="text-blue-500 text-xl font-black">.</span>
-            </div>
+            <!-- SBF -->
+            <img
+              src="@/assets/images/Group.png"
+              alt="Singapore Business Federation"
+              class="w-[146px] h-auto object-contain"
+            />
           </div>
         </div>
       </div>
     </div>
 
     <!-- Bottom bar -->
-    <div class="bg-white border-t border-gray-100">
+    <div style="background: #3f89bd" class="border-t border-white/20">
       <div class="max-w-7xl mx-auto px-4 py-4 text-center">
-        <p class="text-gray-500 text-xs">{{ t('footer.rights') }}</p>
+        <p class="text-white/80 text-base">{{ t('footer.rights') }}</p>
       </div>
     </div>
   </footer>

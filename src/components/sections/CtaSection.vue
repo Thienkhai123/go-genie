@@ -1,45 +1,98 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useScrollReveal } from '@/composables/useScrollReveal';
+import ecosystemImg from '@/assets/images/ecosystem_sep2025_8000x4500.png';
 
 const { t } = useI18n();
+
+const imgRef = ref<HTMLElement | null>(null);
+const cardRef = ref<HTMLElement | null>(null);
+
+useScrollReveal([imgRef, cardRef]);
 </script>
 
 <template>
-  <section class="py-20 bg-[#f0f6fb]" aria-label="Call to action">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-white rounded-3xl shadow-sm overflow-hidden">
-        <!-- City illustration top -->
-        <div
-          class="bg-gradient-to-b from-[#e8f4fb] to-white px-8 pt-10 pb-4 flex justify-center"
-        >
-          <div class="grid grid-cols-4 gap-4 max-w-lg">
-            <div v-for="i in 8" :key="i" class="flex flex-col items-center">
-              <div
-                class="rounded-xl flex items-center justify-center text-2xl shadow-sm"
-                :style="`width: 64px; height: 64px; background: linear-gradient(135deg, #e0f2fe, #bae6fd); transform: translateY(${i % 2 === 0 ? '-6px' : '0px'})`"
-              >
-                {{ ['🏢', '🏭', '🗼', '🚛', '🏬', '🏪', '🏗️', '🏦'][i - 1] }}
-              </div>
-            </div>
-          </div>
-        </div>
+  <section
+    style="background-color: #f9fafa; padding: 60px 16px 60px"
+    aria-label="Call to action"
+  >
+    <div style="max-width: 1084px; margin: 0 auto">
+      <!-- Ecosystem image -->
+      <img
+        ref="imgRef"
+        :src="ecosystemImg"
+        alt="GO-GENIE logistics ecosystem"
+        class="reveal"
+        style="width: 100%; object-fit: contain; display: block"
+      />
 
-        <!-- Text content -->
-        <div class="text-center px-8 pb-10">
-          <h2 class="text-2xl sm:text-3xl font-bold text-gray-800">
+      <!-- White card overlapping just the bottom edge of image -->
+      <div style="padding: 0 40px">
+        <div
+          ref="cardRef"
+          class="reveal delay-200"
+          style="
+            margin-top: -130px;
+            background: #ffffff;
+            border: 1px solid rgba(10, 99, 161, 0.25);
+            border-radius: 24px;
+
+            text-align: center;
+            padding: 40px 40px 48px;
+            position: relative;
+            z-index: 1;
+          "
+        >
+          <h2
+            style="
+              font-size: 28px;
+              font-weight: 700;
+              color: #1f2937;
+              line-height: 1.3;
+              margin: 0;
+            "
+          >
             {{ t('cta.title') }}
-            <span class="block text-blue-500">{{
+            <span style="display: block; color: #3f89bd">{{
               t('cta.titleHighlight')
             }}</span>
           </h2>
           <p
-            class="mt-4 text-gray-500 text-sm max-w-lg mx-auto leading-relaxed"
+            style="
+              margin: 16px auto 0;
+              max-width: 520px;
+              font-size: 18px;
+              color: #6b7280;
+              line-height: 1.7;
+            "
           >
             {{ t('cta.description') }}
           </p>
           <a
             href="#"
-            class="mt-6 inline-block px-6 py-2.5 border border-blue-400 text-blue-500 font-medium rounded-full hover:bg-blue-50 transition-colors text-sm"
+            style="
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              margin-top: 24px;
+              height: 38px;
+              padding: 0 24px;
+              background: #3f89bd;
+              color: #ffffff;
+              font-size: 14px;
+              font-weight: 400;
+              border-radius: 8px;
+              text-decoration: none;
+              border: none;
+              box-shadow:
+                5px 5px 14px 0 rgba(1, 63, 114, 0.18),
+                inset -6px -6px 14px 0 rgba(0, 34, 63, 0.26);
+              transition: opacity 0.2s;
+              cursor: pointer;
+            "
+            onmouseover="this.style.opacity = '0.85'"
+            onmouseout="this.style.opacity = '1'"
           >
             {{ t('cta.button') }}
           </a>

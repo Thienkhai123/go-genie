@@ -1,25 +1,37 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useScrollReveal } from '@/composables/useScrollReveal';
+
+import imgData from '@/assets/images/visual_monitor environmental impact.png';
+import imgScalable from '@/assets/images/visual_green fleet.png';
+import imgImpact from '@/assets/images/visual_environmental impact_1.png';
 
 const { t } = useI18n();
+
+const headerRef = ref<HTMLElement | null>(null);
+const col0 = ref<HTMLElement | null>(null);
+const col1 = ref<HTMLElement | null>(null);
+const col2 = ref<HTMLElement | null>(null);
+
+useScrollReveal([headerRef, col0, col1, col2]);
 
 const features = computed(() => [
   {
     key: 'data',
-    emoji: '📊',
+    image: imgData,
     title: t('sustainability.features.data.title'),
     description: t('sustainability.features.data.description'),
   },
   {
     key: 'scalable',
-    emoji: '🚛',
+    image: imgScalable,
     title: t('sustainability.features.scalable.title'),
     description: t('sustainability.features.scalable.description'),
   },
   {
     key: 'impact',
-    emoji: '🌍',
+    image: imgImpact,
     title: t('sustainability.features.impact.title'),
     description: t('sustainability.features.impact.description'),
   },
@@ -28,32 +40,85 @@ const features = computed(() => [
 
 <template>
   <section class="py-20 bg-white" aria-labelledby="sustain-title">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-14">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8" style="max-width: 1084px">
+      <!-- Header -->
+      <div ref="headerRef" class="reveal text-center mb-14">
         <h2
           id="sustain-title"
-          class="text-3xl sm:text-4xl font-bold text-gray-800"
+          style="
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 32px;
+            color: #1f2937;
+            line-height: 1.3;
+          "
         >
           {{ t('sustainability.title') }}
-          <span class="text-blue-500">
-            {{ t('sustainability.titleHighlight') }}</span
-          >
+          <span style="color: #3f89bd">{{
+            t('sustainability.titleHighlight')
+          }}</span>
         </h2>
-        <p class="mt-4 text-gray-500 text-sm sm:text-base max-w-xl mx-auto">
+        <p
+          class="mt-4 max-w-xl mx-auto"
+          style="
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            color: #6b7280;
+          "
+        >
           {{ t('sustainability.description') }}
         </p>
       </div>
 
+      <!-- 3-column grid -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-10">
-        <div v-for="feature in features" :key="feature.key" class="text-center">
-          <!-- 3D-style emoji illustration -->
-          <div class="text-7xl mb-6 flex justify-center">
-            <span class="drop-shadow-lg">{{ feature.emoji }}</span>
+        <div
+          v-for="(feature, i) in features"
+          :key="feature.key"
+          :ref="
+            (el) => {
+              if (i === 0) col0 = el as HTMLElement;
+              else if (i === 1) col1 = el as HTMLElement;
+              else col2 = el as HTMLElement;
+            }
+          "
+          :class="[
+            'reveal text-center flex flex-col items-center',
+            i === 1 ? 'delay-200' : i === 2 ? 'delay-400' : 'delay-100',
+          ]"
+        >
+          <!-- Illustration -->
+          <div class="mb-6" style="width: 206px; height: 206px">
+            <img
+              :src="feature.image"
+              :alt="feature.title"
+              style="width: 206px; height: 206px; object-fit: contain"
+            />
           </div>
-          <h3 class="font-semibold text-gray-800 text-base mb-2">
+
+          <!-- Title -->
+          <h3
+            style="
+              font-family: 'Inter', sans-serif;
+              font-weight: 600;
+              font-size: 16px;
+              color: #1f2937;
+              margin-bottom: 8px;
+            "
+          >
             {{ feature.title }}
           </h3>
-          <p class="text-gray-500 text-sm leading-relaxed">
+
+          <!-- Description -->
+          <p
+            style="
+              font-family: 'Inter', sans-serif;
+              font-size: 18px;
+              color: #6b7280;
+              line-height: 1.6;
+              max-width: 220px;
+            "
+          >
             {{ feature.description }}
           </p>
         </div>

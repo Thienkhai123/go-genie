@@ -12,6 +12,6 @@ export const i18n = createI18n({
 });
 
 export const availableLocales = [
-  { code: 'vi', label: 'Tiếng Việt', flag: '🇻🇳' },
-  { code: 'en', label: 'English', flag: '🇺🇸' },
+  { code: 'en', label: 'English', flagImg: '/src/assets/images/us.png' },
+  { code: 'vi', label: 'Tiếng Việt', flagImg: '' },
 ];

@@ -1,8 +1,17 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useScrollReveal } from '@/composables/useScrollReveal';
 
 const { t } = useI18n();
+
+const headerRef = ref<HTMLElement | null>(null);
+const card0 = ref<HTMLElement | null>(null);
+const card1 = ref<HTMLElement | null>(null);
+const card2 = ref<HTMLElement | null>(null);
+const ctaRef = ref<HTMLElement | null>(null);
+
+useScrollReveal([headerRef, card0, card1, card2, ctaRef]);
 
 const features = computed(() => [
   {
@@ -36,17 +45,36 @@ const features = computed(() => [
   <section class="py-20 bg-white" aria-labelledby="carbon-title">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Header -->
-      <div class="text-center mb-14">
+      <div ref="headerRef" class="reveal text-center mb-14">
         <h2
           id="carbon-title"
-          class="text-3xl sm:text-4xl font-bold text-gray-800"
+          style="
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 36px;
+            line-height: 100%;
+            letter-spacing: 0px;
+            color: #1f2937;
+            text-align: center;
+          "
         >
           {{ t('carbonTracking.title') }}
-          <span class="block text-blue-500">{{
+          <span class="block" style="color: #3f89bd">{{
             t('carbonTracking.titleHighlight')
           }}</span>
         </h2>
-        <p class="mt-4 text-gray-500 text-sm sm:text-base max-w-2xl mx-auto">
+        <p
+          class="mt-4 max-w-2xl mx-auto"
+          style="
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 22px;
+            letter-spacing: 0px;
+            text-align: center;
+            color: #6b7280;
+          "
+        >
           {{ t('carbonTracking.description') }}
         </p>
       </div>
@@ -54,18 +82,32 @@ const features = computed(() => [
       <!-- Feature cards -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
         <div
-          v-for="feature in features"
+          v-for="(feature, i) in features"
           :key="feature.key"
-          class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
+          :ref="
+            (el) => {
+              if (i === 0) card0 = el as HTMLElement;
+              else if (i === 1) card1 = el as HTMLElement;
+              else card2 = el as HTMLElement;
+            }
+          "
+          :class="[
+            'reveal card-hover bg-white rounded-2xl p-6',
+            i === 1 ? 'delay-200' : i === 2 ? 'delay-400' : 'delay-100',
+          ]"
+          style="
+            border: 1px solid rgba(10, 99, 161, 0.25);
+            box-shadow:
+              5px 8px 9px 0 rgba(10, 99, 161, 0.08),
+              inset -8px -8px 16px 0 rgba(3, 106, 177, 0.07);
+          "
         >
           <div
-            :class="[
-              'w-10 h-10 rounded-xl flex items-center justify-center mb-4',
-              feature.iconBg,
-            ]"
+            :class="['flex items-center justify-center mb-4', feature.iconBg]"
+            style="width: 54px; height: 54px; border-radius: 8px"
           >
             <svg
-              :class="['w-5 h-5', feature.iconColor]"
+              :class="['w-6 h-6', feature.iconColor]"
               fill="none"
               stroke="currentColor"
               stroke-width="1.5"
@@ -78,18 +120,41 @@ const features = computed(() => [
               />
             </svg>
           </div>
-          <h3 class="font-semibold text-gray-800 mb-2">{{ feature.title }}</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">
+          <h3
+            style="
+              font-family: 'Inter', sans-serif;
+              font-weight: 500;
+              font-size: 20px;
+              line-height: 150%;
+              letter-spacing: -0.02em;
+              color: #1f2937;
+              margin-bottom: 8px;
+            "
+          >
+            {{ feature.title }}
+          </h3>
+          <p
+            style="
+              font-family: 'Inter', sans-serif;
+              font-weight: 400;
+              font-size: 18px;
+              line-height: 1.6;
+              color: #6b7280;
+            "
+          >
             {{ feature.description }}
           </p>
         </div>
       </div>
 
       <!-- CTA -->
-      <div class="text-center">
+      <div ref="ctaRef" class="reveal delay-300 text-center">
         <a
           href="#"
-          class="inline-flex items-center gap-2 px-6 py-2.5 border border-blue-400 text-blue-500 font-medium rounded-full hover:bg-blue-50 transition-colors text-sm"
+          class="inline-flex items-center gap-2 px-6 py-2.5 font-medium rounded-xl transition-colors text-sm"
+          style="border: 1px solid #3f89bd; color: #3f89bd"
+          onmouseover="this.style.background = '#eef4f9'"
+          onmouseout="this.style.background = 'transparent'"
         >
           {{ t('carbonTracking.cta') }}
           <svg
