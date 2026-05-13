@@ -62,7 +62,7 @@ const navItems = [
 
 <template>
   <header
-    class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300"
+    class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 h-[66px]"
     :style="
       isScrolled || isMobileOpen
         ? 'background-color: #3f89bd'
@@ -70,19 +70,19 @@ const navItems = [
     "
   >
     <nav class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="flex items-center h-14 gap-8">
+      <div class="flex items-center h-[66px] gap-8">
         <!-- Logo -->
-        <router-link to="/" class="shrink-0">
-          <span
-            class="text-white font-black tracking-wide"
-            style="font-size: 27px; letter-spacing: 0.02em"
-            >GO-GENIE</span
-          >
+        <router-link to="/" class="shrink-0 flex items-center">
+          <img
+            src="@/assets/svg/logo.svg"
+            alt="GO-GENIE"
+            style="height: 27px; width: auto"
+          />
         </router-link>
 
         <!-- Desktop Nav links -->
         <div
-          class="hidden lg:flex items-center gap-0 flex-1"
+          class="hidden lg:flex items-center gap-6 flex-1"
           @mouseleave="activeDropdown = null"
         >
           <div
@@ -92,7 +92,7 @@ const navItems = [
             @mouseenter="activeDropdown = item.key"
           >
             <button
-              class="flex items-center gap-1 px-3 py-2 text-white hover:text-white/80 transition-colors whitespace-nowrap cursor-pointer"
+              class="flex items-center gap-1 py-2 text-white hover:text-white/80 transition-colors whitespace-nowrap cursor-pointer"
               style="font-size: 13px"
             >
               {{ item.label() }}

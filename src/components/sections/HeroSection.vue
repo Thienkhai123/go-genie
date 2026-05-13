@@ -19,29 +19,28 @@ const { t } = useI18n();
     aria-label="Hero"
   >
     <!-- Text block -->
-    <div
-      class="relative z-10 text-center px-4 mx-auto pt-14 pb-10 w-full"
-      style="max-width: 900px"
-    >
+    <div class="relative z-10 text-center pt-[42px] pb-10 w-full">
       <h1
-        class="hero-title font-bold text-white leading-tight text-2xl sm:text-3xl md:text-4xl lg:text-[40px]"
+        class="hero-title text-white leading-tight text-[40px] font-medium sm:text-3xl md:text-4xl lg:text-[40px]"
       >
         {{ t('hero.title') }}
       </h1>
       <p
-        class="hero-desc mt-4 text-white/85 mx-auto text-sm sm:text-base md:text-lg"
-        style="max-width: 640px"
+        class="hero-desc font-normal mt-3 text-white mx-auto text-sm sm:text-base md:text-lg"
       >
         {{ t('hero.description') }}
       </p>
       <a
         href="#"
-        class="hero-cta mt-8 inline-flex items-center gap-2 font-semibold rounded-xl transition-colors duration-200 cursor-pointer text-sm sm:text-base"
+        class="hero-cta mt-8 inline-flex font-medium items-center gap-2 rounded-xl transition-colors duration-200 cursor-pointer text-sm sm:text-base"
         style="
           padding: 10px 22px;
-          background: #e8f2fb;
+          background: white;
           border: 2px solid #7ab8e0;
           color: #2a7ab8;
+          box-shadow:
+            5px 8px 12px 0px rgba(10, 99, 161, 0.14),
+            inset -4px -4px 12px 0px rgba(3, 106, 177, 0.2);
         "
       >
         {{ t('hero.cta') }}

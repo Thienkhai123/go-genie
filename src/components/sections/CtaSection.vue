@@ -14,7 +14,7 @@ useScrollReveal([imgRef, cardRef]);
 
 <template>
   <section
-    style="background-color: #f9fafa; padding: 60px 16px 60px"
+    style="background-color: #f9fafa; padding: 72px 16px 72px"
     aria-label="Call to action"
   >
     <div style="max-width: 1084px; margin: 0 auto">
@@ -33,7 +33,7 @@ useScrollReveal([imgRef, cardRef]);
           ref="cardRef"
           class="reveal delay-200"
           style="
-            margin-top: -40px;
+            margin-top: -130px;
             background: #ffffff;
             border: 1px solid rgba(10, 99, 161, 0.25);
             border-radius: 24px;

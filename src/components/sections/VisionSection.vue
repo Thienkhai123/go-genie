@@ -15,7 +15,7 @@ useScrollReveal([headerRef, imageRef, descRef]);
 
 <template>
   <section
-    class="py-16"
+    class="py-[72px]"
     style="background-color: #f9fafa"
     aria-labelledby="vision-title"
   >

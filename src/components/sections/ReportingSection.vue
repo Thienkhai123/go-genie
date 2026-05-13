@@ -39,7 +39,7 @@ const features = computed(() => [
 </script>
 
 <template>
-  <section class="py-20 bg-[#f0f6fb]" aria-labelledby="reporting-title">
+  <section class="py-[72px] bg-[#f0f6fb]" aria-labelledby="reporting-title">
     <div class="mx-auto px-4 sm:px-6 lg:px-8" style="max-width: 1084px">
       <!-- Header -->
       <div ref="headerRef" class="reveal text-center mb-14">
